@@ -474,6 +474,25 @@ body {
 .resultado-fila.malo strong { color: var(--danger); }
 .resultado-fila.bueno strong { color: var(--success); }
 
+/* AVISO CRISIS */
+.aviso-crisis {
+  background: #1a1008;
+  border: 1px solid #92400e;
+  border-radius: 12px;
+  padding: 14px 16px;
+  font-size: 14px;
+  color: #fbbf24;
+  line-height: 1.6;
+  margin-top: 20px;
+}
+
+.no-es-tuya {
+  margin-top: 16px;
+  font-size: 14px;
+  color: var(--muted);
+  text-align: center;
+}
+
 /* UTILIDADES */
 .mt-8 { margin-top: 8px; }
 .mt-16 { margin-top: 16px; }
