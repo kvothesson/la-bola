@@ -282,6 +282,13 @@ function renderOpciones(nodo, puedVolver) {
 }
 
 function renderResultado(nodo, puedVolver) {
+  const esCrisis = nodo.titulo?.toLowerCase().includes('crisis') ||
+    nodo.titulo?.toLowerCase().includes('no podés') ||
+    nodo.titulo?.toLowerCase().includes('sin trabajo') ||
+    nodo.titulo?.toLowerCase().includes('inesperado') ||
+    nodo.titulo?.toLowerCase().includes('alcanza') ||
+    nodo.titulo?.toLowerCase().includes('gastás');
+
   app.innerHTML = `
     ${puedVolver ? `<button class="btn-volver" onclick="volver()">← Volver</button>` : ''}
     <div class="header">
@@ -295,7 +302,16 @@ function renderResultado(nodo, puedVolver) {
         </div>
       `).join('')}
     </div>
-    <button class="btn btn-secundario mt-24" onclick="reiniciar()">Empezar de nuevo</button>
+    ${esCrisis ? `
+      <div class="aviso-crisis">
+        Esto es orientación general. Si la situación es muy compleja, un asesor financiero o ANSES pueden ayudar más que cualquier app.
+      </div>
+    ` : ''}
+    <div class="no-es-tuya">
+      ¿Esta situación no es exactamente la tuya?
+      <button class="btn-link" onclick="reiniciar()">Volvé al inicio</button>
+    </div>
+    <button class="btn btn-secundario mt-8" onclick="reiniciar()">Empezar de nuevo</button>
   `;
 }
 
