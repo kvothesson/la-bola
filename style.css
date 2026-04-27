@@ -1,0 +1,483 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg: #0a0a0a;
+  --surface: #141414;
+  --border: #222;
+  --text: #f0f0f0;
+  --muted: #666;
+  --accent: #3b82f6;
+  --danger: #ef4444;
+  --success: #22c55e;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 24px 16px 48px;
+}
+
+#app {
+  width: 100%;
+  max-width: 480px;
+}
+
+/* HEADER */
+.header {
+  margin-bottom: 40px;
+  padding-top: 16px;
+}
+
+.header h1 {
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+.header p {
+  color: var(--muted);
+  margin-top: 6px;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+/* SECCIÓN */
+.section-title {
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--muted);
+  margin-bottom: 16px;
+}
+
+/* DEUDAS */
+.deuda-item {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.deuda-item.pagada {
+  opacity: 0.4;
+}
+
+.deuda-item.pagada .deuda-nombre {
+  text-decoration: line-through;
+}
+
+.deuda-info {
+  flex: 1;
+}
+
+.deuda-nombre {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.deuda-monto {
+  font-size: 22px;
+  font-weight: 700;
+  margin-top: 4px;
+}
+
+.deuda-monto.primero {
+  color: var(--accent);
+}
+
+.deuda-monto-input {
+  background: none;
+  border: none;
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+  font-size: 22px;
+  font-weight: 700;
+  width: 100%;
+  padding: 2px 0;
+  outline: none;
+  margin-top: 4px;
+}
+
+.deuda-monto-input:focus {
+  border-bottom-color: var(--accent);
+}
+
+.deuda-eliminar {
+  background: none;
+  border: none;
+  color: var(--muted);
+  font-size: 20px;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 6px;
+  line-height: 1;
+}
+
+.deuda-eliminar:hover {
+  color: var(--danger);
+}
+
+/* FORMULARIO AGREGAR */
+.form-agregar {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 10px;
+}
+
+.form-fila {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.form-agregar input {
+  flex: 1;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 12px 14px;
+  color: var(--text);
+  font-size: 16px;
+  outline: none;
+  width: 100%;
+}
+
+.form-agregar input:focus {
+  border-color: var(--accent);
+}
+
+.form-agregar input::placeholder {
+  color: var(--muted);
+}
+
+/* CAMPO MENSUAL */
+.campo-mensual {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 10px;
+}
+
+.campo-mensual label {
+  display: block;
+  font-size: 15px;
+  color: var(--muted);
+  margin-bottom: 12px;
+}
+
+.campo-mensual input {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px;
+  color: var(--text);
+  font-size: 22px;
+  font-weight: 700;
+  outline: none;
+  width: 100%;
+}
+
+.campo-mensual input:focus {
+  border-color: var(--accent);
+}
+
+.campo-mensual input::placeholder {
+  color: var(--muted);
+  font-weight: 400;
+  font-size: 16px;
+}
+
+/* BOTONES */
+.btn {
+  width: 100%;
+  padding: 16px;
+  border-radius: 12px;
+  border: none;
+  font-size: 17px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: opacity 0.15s;
+}
+
+.btn:active {
+  opacity: 0.8;
+}
+
+.btn-primario {
+  background: var(--accent);
+  color: #fff;
+}
+
+.btn-secundario {
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+.btn-success {
+  background: var(--success);
+  color: #fff;
+  font-size: 18px;
+  padding: 20px;
+}
+
+.btn-link {
+  background: none;
+  border: none;
+  color: var(--muted);
+  font-size: 14px;
+  cursor: pointer;
+  padding: 8px 0;
+  text-decoration: underline;
+}
+
+/* PLAN DEL MES */
+.plan-box {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 16px;
+}
+
+.plan-label {
+  font-size: 13px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.plan-deuda {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 4px;
+}
+
+.plan-monto {
+  font-size: 36px;
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 4px;
+}
+
+.plan-resto {
+  font-size: 14px;
+  color: var(--muted);
+  margin-top: 8px;
+}
+
+/* PROGRESO */
+.progreso-box {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 16px;
+}
+
+.progreso-fila {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  color: var(--muted);
+  margin-bottom: 10px;
+}
+
+.progreso-fila span:last-child {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.barra-container {
+  background: var(--bg);
+  border-radius: 99px;
+  height: 8px;
+  overflow: hidden;
+}
+
+.barra-fill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: 99px;
+  transition: width 0.4s ease;
+}
+
+/* MES CERRADO */
+.cerrado-box {
+  text-align: center;
+  padding: 32px 0;
+}
+
+.cerrado-icono {
+  font-size: 48px;
+  margin-bottom: 16px;
+}
+
+.cerrado-titulo {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.cerrado-sub {
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+/* DIVIDER */
+.divider {
+  height: 1px;
+  background: var(--border);
+  margin: 24px 0;
+}
+
+/* TOTAL */
+.total-label {
+  font-size: 13px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.total-monto {
+  font-size: 42px;
+  font-weight: 800;
+  line-height: 1.1;
+  margin-top: 4px;
+}
+
+/* VOLVER */
+.btn-volver {
+  background: none;
+  border: none;
+  color: var(--muted);
+  font-size: 15px;
+  cursor: pointer;
+  padding: 0 0 24px 0;
+  display: block;
+}
+
+.btn-volver:hover { color: var(--text); }
+
+/* PREGUNTA */
+.pregunta {
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.4;
+  margin-bottom: 28px;
+}
+
+/* OPCIONES */
+.opciones {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.btn-opcion {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  color: var(--text);
+  font-size: 16px;
+  padding: 18px 16px;
+  text-align: left;
+  cursor: pointer;
+  line-height: 1.4;
+  transition: border-color 0.15s;
+}
+
+.btn-opcion:hover {
+  border-color: var(--accent);
+}
+
+/* PASOS */
+.pasos {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 8px;
+}
+
+.paso {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+
+.paso-num {
+  background: var(--accent);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  border-radius: 50%;
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.paso-texto {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--text);
+}
+
+/* CALCULADORA RESULTADO */
+.resultado-calc {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+  margin-top: 16px;
+}
+
+.resultado-fila {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 8px 0;
+  font-size: 15px;
+  border-bottom: 1px solid var(--border);
+}
+
+.resultado-fila:last-child { border-bottom: none; }
+
+.resultado-fila span { color: var(--muted); }
+.resultado-fila strong { text-align: right; }
+.resultado-fila.malo strong { color: var(--danger); }
+.resultado-fila.bueno strong { color: var(--success); }
+
+/* UTILIDADES */
+.mt-8 { margin-top: 8px; }
+.mt-16 { margin-top: 16px; }
+.mt-24 { margin-top: 24px; }
+.mb-16 { margin-bottom: 16px; }
+.text-muted { color: var(--muted); font-size: 14px; }
+.text-center { text-align: center; }

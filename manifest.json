@@ -1,0 +1,10 @@
+{
+  "name": "La Bola",
+  "short_name": "La Bola",
+  "description": "Organizá tus deudas. Un paso por mes.",
+  "start_url": "/la-bola/",
+  "display": "standalone",
+  "background_color": "#0a0a0a",
+  "theme_color": "#0a0a0a",
+  "icons": []
+}
