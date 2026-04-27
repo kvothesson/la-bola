@@ -656,6 +656,12 @@ function calcularMinimo() {
   `;
 }
 
+// ─── ERROR TRACKING ───────────────────────────────────────────────────────────
+
+window.onerror = (msg, src, line, col, err) => {
+  track('js_error', { msg: String(msg), line, col, stack: err?.stack?.slice(0, 300) });
+};
+
 // ─── INIT ─────────────────────────────────────────────────────────────────────
 
 function init() {
