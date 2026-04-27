@@ -1,0 +1,8 @@
+# Env
+.env
+
+# Skills (fuente en el repo, no commitear al plugin)
+skills/
+
+# Claude
+.claude/
