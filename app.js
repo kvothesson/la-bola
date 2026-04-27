@@ -555,10 +555,24 @@ function calcularMinimo() {
 
   if (!deuda || !minimo) return;
 
-  let saldo = deuda;
-  let meses = 0;
-  let totalPagado = 0;
+  // Si el mínimo cubre la deuda completa no hay trampa que mostrar
+  if (minimo >= deuda) {
+    document.getElementById('calc-resultado').innerHTML = `
+      <div class="resultado-calc">
+        <div class="resultado-fila bueno">
+          <span>Con ese pago cancelás la deuda en un mes.</span>
+          <strong>Sin intereses relevantes.</strong>
+        </div>
+        <div class="resultado-fila" style="font-size:13px;color:var(--muted);border:none;padding-top:4px">
+          <span>El mínimo real suele ser el 3-5% de la deuda. Revisá el resumen de tu tarjeta o préstamo.</span>
+        </div>
+      </div>
+    `;
+    return;
+  }
+
   const MAX_MESES = 600;
+  let saldo = deuda, meses = 0, totalPagado = 0;
 
   while (saldo > 0 && meses < MAX_MESES) {
     const interes = saldo * tasa;
@@ -572,23 +586,25 @@ function calcularMinimo() {
   const interesesTotales = totalPagado - deuda;
   const anios = Math.floor(meses / 12);
   const mesesResto = meses % 12;
-
-  const pagarDoble = minimo * 2;
-  let saldo2 = deuda;
-  let meses2 = 0;
-  let total2 = 0;
-  while (saldo2 > 0 && meses2 < MAX_MESES) {
-    const int2 = saldo2 * tasa;
-    saldo2 = saldo2 + int2 - pagarDoble;
-    total2 += pagarDoble;
-    meses2++;
-    if (saldo2 < 0) { total2 += saldo2; saldo2 = 0; }
-  }
-  const ahorro = totalPagado - total2;
-
   const tiempo = meses >= MAX_MESES
     ? 'nunca (la deuda crece más rápido de lo que pagás)'
     : `${anios > 0 ? anios + ' año' + (anios > 1 ? 's' : '') + ' y ' : ''}${mesesResto} mes${mesesResto !== 1 ? 'es' : ''}`;
+
+  // Comparación con el doble solo si el mínimo es menor al 30% de la deuda
+  const mostrarDoble = minimo < deuda * 0.3;
+  const pagarDoble = minimo * 2;
+  let saldo2 = deuda, meses2 = 0, total2 = 0;
+
+  if (mostrarDoble) {
+    while (saldo2 > 0 && meses2 < MAX_MESES) {
+      const int2 = saldo2 * tasa;
+      saldo2 = saldo2 + int2 - pagarDoble;
+      total2 += pagarDoble;
+      meses2++;
+      if (saldo2 < 0) { total2 += saldo2; saldo2 = 0; }
+    }
+  }
+  const ahorro = totalPagado - total2;
 
   document.getElementById('calc-resultado').innerHTML = `
     <div class="resultado-calc">
@@ -604,7 +620,7 @@ function calcularMinimo() {
         <span>Solo en intereses</span>
         <strong>${formatPesos(interesesTotales)}</strong>
       </div>
-      ${meses < MAX_MESES && ahorro > 0 ? `
+      ${mostrarDoble && meses < MAX_MESES && ahorro > 0 ? `
         <div class="divider"></div>
         <div class="resultado-fila bueno">
           <span>Si pagás el doble (${formatPesos(pagarDoble)}/mes)</span>
