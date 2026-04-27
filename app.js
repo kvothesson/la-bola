@@ -420,6 +420,18 @@ function renderPlanMes(puedVolver) {
   `;
 }
 
+function renderLibre() {
+  app.innerHTML = `
+    <div class="header"><h1>La Bola</h1></div>
+    <div class="cerrado-box">
+      <div class="cerrado-icono">🎉</div>
+      <div class="cerrado-titulo">Saliste de la bola.</div>
+      <div class="cerrado-sub">No tenés más deudas cargadas. Eso es todo.</div>
+    </div>
+    <button class="btn btn-secundario mt-16" onclick="reiniciar()">Empezar de nuevo</button>
+  `;
+}
+
 function renderMesCerrado() {
   const estado = cargar();
   const deudas = (estado.deudas || []).filter(d => d.monto > 0);
