@@ -531,19 +531,28 @@ function marcarPagado() {
   for (const deuda of ordenadas) {
     if (restante <= 0) break;
     const pago = Math.min(deuda.monto, restante);
-    const idx = estado.deudas.findIndex(d => d.nombre === deuda.nombre);
+    // Buscar por nombre Y monto para evitar duplicados
+    const idx = estado.deudas.findIndex(d => d.nombre === deuda.nombre && d.monto === deuda.monto);
     estado.deudas[idx].monto = Math.max(0, deuda.monto - pago);
     restante -= pago;
   }
+  // Limpiar deudas en cero
+  estado.deudas = estado.deudas.filter(d => d.monto > 0);
   estado.mesCerrado = true;
   guardar(estado);
   track('mes_cerrado');
-  renderMesCerrado();
+
+  if (estado.deudas.length === 0) {
+    renderLibre();
+  } else {
+    renderMesCerrado();
+  }
 }
 
 function nuevoMes() {
   const estado = cargar();
   estado.mesCerrado = false;
+  estado.deudas = (estado.deudas || []).filter(d => d.monto > 0);
   guardar(estado);
   renderPlanDeudas(false);
 }
